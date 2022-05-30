@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:flutter/services.dart';
+import 'package:project_ta_view_only/views/history/history_home_view.dart';
 import 'package:project_ta_view_only/views/home_view.dart';
 import 'package:project_ta_view_only/views/product/product_home_view.dart';
 import 'package:project_ta_view_only/views/sale/sale_view.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/home', page: () => HomeView()),
         GetPage(name: '/saleView', page: () => SaleView()),
         GetPage(name: '/productHomeView', page: () => ProductHomeView()),
+        GetPage(name: '/historyHomeView', page: () => HistoryHomeView()),
       ],
     );
   }

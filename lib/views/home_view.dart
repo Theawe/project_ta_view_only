@@ -68,8 +68,9 @@ class HomeView extends StatelessWidget {
         padding: EdgeInsets.only(left: 10),
         children: [
           menuItem('Penjualan', '/saleView/'),
-          menuItem('Riwayat', '/productHomeView'),
-          menuItem('Riwayat', '/productHomeView'),
+          menuItem('Riwayat', '/historyHomeView'),
+          menuItem('Product', '/productHomeView'),
+          menuItem('Rekap', '/recapHomeView'),
         ],
       ),
       // body: Center(
