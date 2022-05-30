@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_ta_view_only/core/controllers/productController.dart';
+import 'package:project_ta_view_only/views/product/widgets/list_product_edit_widget.dart';
 import 'package:project_ta_view_only/views/product/widgets/list_product_widget.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ProductHomeView extends StatelessWidget {
-  const ProductHomeView({Key? key}) : super(key: key);
+  ProductHomeView({Key? key}) : super(key: key);
 
+  ProductController productController = Get.put(ProductController());
   @override
   Widget build(BuildContext context) {
     Future openDialog() => showDialog(
@@ -65,19 +68,39 @@ class ProductHomeView extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Edit',
-                        style: TextStyle(color: Colors.white),
-                      )),
-                )
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Obx(() {
+                      return productController.editMode == false
+                          ? ElevatedButton(
+                              onPressed: () {
+                                productController.changeMode();
+                              },
+                              child: Text(
+                                'Edit',
+                                style: TextStyle(color: Colors.white),
+                              ))
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                              ),
+                              onPressed: () {
+                                productController.changeMode();
+                              },
+                              child: Text(
+                                'Edit',
+                                style: TextStyle(color: Colors.blueAccent),
+                              ));
+                    }))
               ],
             ),
             Expanded(
               child: Container(
-                  padding: EdgeInsets.all(16.0), child: ListProductWidget()),
+                  padding: EdgeInsets.all(16.0),
+                  child: Obx(() {
+                    return productController.editMode == false
+                        ? ListProductWidget()
+                        : ListProductEditWidget();
+                  })),
             ),
           ],
         ),
@@ -86,10 +109,10 @@ class ProductHomeView extends StatelessWidget {
   }
 }
 
-_onBasicAlertPressed(context) {
+_editHarga(context) {
   Alert(
     context: context,
-    title: "RFLUTTER ALERT",
+    title: "Edit Harga",
     desc: "Flutter is more awesome with RFlutter Alert.",
   ).show();
 }
@@ -98,20 +121,20 @@ _onBasicAlertPressed(context) {
 _onAlertWithCustomContentPressed(context) {
   Alert(
       context: context,
-      title: "LOGIN",
+      // title: "LOGIN",
       content: Column(
         children: <Widget>[
           TextField(
             decoration: InputDecoration(
-              icon: Icon(Icons.account_circle),
-              labelText: 'Username',
+              icon: Icon(Icons.store),
+              labelText: 'Nama Produk',
             ),
           ),
           TextField(
-            obscureText: true,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              icon: Icon(Icons.lock),
-              labelText: 'Password',
+              icon: Icon(Icons.money),
+              labelText: 'Harga Produk',
             ),
           ),
         ],
@@ -120,7 +143,7 @@ _onAlertWithCustomContentPressed(context) {
         DialogButton(
           onPressed: () => Navigator.pop(context),
           child: Text(
-            "LOGIN",
+            "SIMPAN",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         )

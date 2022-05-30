@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: defaultColorScheme,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/productHomeView',
+      initialRoute: '/home',
       getPages: [
         GetPage(name: '/home', page: () => HomeView()),
         GetPage(name: '/saleView', page: () => SaleView()),

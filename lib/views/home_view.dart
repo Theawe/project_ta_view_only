@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -66,13 +67,9 @@ class HomeView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.only(left: 10),
         children: [
-          menuItem('Penjualan'),
-          menuItem('Riwayat'),
-          menuItem('Riwayat'),
-          menuItem('Riwayat'),
-          menuItem('Riwayat'),
-          menuItem('Riwayat'),
-          menuItem('Riwayat'),
+          menuItem('Penjualan', '/saleView/'),
+          menuItem('Riwayat', '/productHomeView'),
+          menuItem('Riwayat', '/productHomeView'),
         ],
       ),
       // body: Center(
@@ -102,7 +99,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Container menuItem(String judul) {
+  Container menuItem(String judul, String route) {
     return Container(
       margin: EdgeInsets.only(right: 30),
       alignment: AlignmentDirectional.center,
@@ -130,7 +127,9 @@ class HomeView extends StatelessWidget {
               primary: Colors.blueAccent,
               // padding: EdgeInsets.all(16.0),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(route);
+            },
             child: const Text(
               'Tambah',
               style: TextStyle(color: Colors.white),
